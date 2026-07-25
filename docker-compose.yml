@@ -1,0 +1,13 @@
+services:
+  idalib-mcp:
+    image: ghcr.io/nrf24l01/ida-pro-mcp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.idalib-http
+    ports:
+      - "8745:8745"
+    volumes:
+      - ${IDADIR:?Set IDADIR to your IDA install path}:/opt/ida:ro
+      - ~/.idapro:/root/.idapro:ro
+      - ./work:/work
+    restart: unless-stopped
